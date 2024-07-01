@@ -1057,6 +1057,35 @@ require("lazy").setup({
 			alpha.setup(startify.config)
 		end,
 	},
+
+	-- Workspaces (Projects)
+	{
+		"natecraddock/workspaces.nvim",
+		config = function()
+			require("workspaces").setup({
+				hooks = {
+					open = "Neotree reveal",
+				},
+			})
+			local telescope = require("telescope")
+			telescope.load_extension("workspaces")
+			vim.keymap.set(
+				"n",
+				"<leader>sp",
+				":Telescope workspaces<CR>",
+				{ desc = "[S]earch Workspaces ([P]rojects)" }
+			)
+			vim.keymap.set("n", "<leader>ap", ":WorkspacesAdd <name> <path>", { desc = "[A]dd Workspace ([P]roject)" })
+			vim.keymap.set("n", "<leader>ad", ":WorkspacesAddDir <path>", { desc = "[A]dd Workspaces in directory" })
+			vim.keymap.set("n", "<leader>dp", ":WorkspacesRemove <name>", { desc = "[D]elete Workspace ([P]roject)" })
+			vim.keymap.set(
+				"n",
+				"<leader>dd",
+				":WorkspacesRemoveDir <name>",
+				{ desc = "[D]elese Workspaces in directory" }
+			)
+		end,
+	},
 }, {
 	ui = {
 		icons = vim.g.have_nerd_font and {} or {
