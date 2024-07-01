@@ -704,8 +704,9 @@ require("lazy").setup({
 				"typescript",
 				"xml",
 				"yaml",
+				"norg",
 			},
-
+			ignore_insatll = { "org" },
 			-- Autoinstall languages that are not installed
 			auto_install = true,
 			sync_install = false,
@@ -1084,6 +1085,17 @@ require("lazy").setup({
 				":WorkspacesRemoveDir <name>",
 				{ desc = "[D]elese Workspaces in directory" }
 			)
+		end,
+	},
+	{
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			require("orgmode").setup({
+				org_agenda_files = "C:/Users/craig/Downloads/org/**/*",
+				org_default_notes_file = "C:/Users/craig/Downloads/org/refile.org",
+			})
 		end,
 	},
 }, {
