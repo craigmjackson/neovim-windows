@@ -278,6 +278,7 @@ require("lazy").setup({
 			{ "folke/neodev.nvim", opts = {} },
 		},
 		config = function()
+			local userprofile = os.getenv("USERPROFILE")
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -384,7 +385,7 @@ require("lazy").setup({
 				},
 				vuels = {}, -- Vue.js
 				powershell_es = { -- PowerShell
-					bundle_path = "C:/Users/craig/Downloads/PowerShellEditorServices",
+					bundle_path = userprofile .. "/Downloads/PowerShellEditorServices",
 				},
 				ansiblels = {}, -- Ansible
 				autotools_ls = {}, -- AutoConf/AutoMake
@@ -435,7 +436,7 @@ require("lazy").setup({
 					powershell_es = function()
 						local lspconfig = require("lspconfig")
 						lspconfig.powershell_es.setup({
-							bundle_path = "C:/Users/craig/Downloads/PowerShellEditorServices",
+							bundle_path = userprofile .. "/Downloads/PowerShellEditorServices",
 							on_attach = function(_, bufnr)
 								vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 								local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -718,6 +719,7 @@ require("lazy").setup({
 			indent = { enable = true, disable = { "ruby" } },
 		},
 		config = function(_, opts)
+			local userprofile = os.getenv("USERPROFILE")
 			-- Prefer git instead of curl in order to improve connectivity in some environments
 			require("nvim-treesitter.install").prefer_git = true
 			require("nvim-treesitter.configs").setup(opts)
@@ -726,7 +728,7 @@ require("lazy").setup({
 			-- Add powershell support manually
 			treesitter_parser_config.powershell = {
 				install_info = {
-					url = "c:/Users/craig/AppData/Local/nvim/tparsers/tree-sitter-powershell",
+					url = userprofile .. "/AppData/Local/nvim/tparsers/tree-sitter-powershell",
 					files = { "src/parser.c", "src/scanner.c" },
 					branch = "main",
 					generate_requires_npm = false,
@@ -1092,9 +1094,10 @@ require("lazy").setup({
 		event = "VeryLazy",
 		ft = { "org" },
 		config = function()
+			local userprofile = os.getenv("USERPROFILE")
 			require("orgmode").setup({
-				org_agenda_files = "C:/Users/craig/Downloads/org/**/*",
-				org_default_notes_file = "C:/Users/craig/Downloads/org/refile.org",
+				org_agenda_files = userprofile .. "/Downloads/org/**/*",
+				org_default_notes_file = userprofile .. "/Downloads/org/refile.org",
 			})
 		end,
 	},
